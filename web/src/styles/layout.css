@@ -1,19 +1,211 @@
-html {
-  font-family: var(--font-family-sans);
-  font-size: var(--font-base-size);
-  line-height: var(--font-base-line-height);
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css?family=Quicksand");
+@import url("https://fonts.googleapis.com/css?family=Prompt");
+@import url("https://fonts.googleapis.com/css?family=Barlow+Condensed");
+@import url("https://fonts.googleapis.com/css?family=Roboto+Mono");
 
 body {
-  -webkit-font-smoothing: antialiased;
-  background: var(--color-white);
-  color: var(--color-black);
   margin: 0;
+  font-family: "Quicksand", "Prompt", "Barlow Condensed",
+    "Roboto Mono" -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #232021;
 }
 
-html,
-body,
-body > div,
-body > div > div {
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+h1 {
+  @apply font-barlow text-5xl text-error;
+}
+
+h2 {
+  @apply font-barlow text-4xl text-error;
+}
+
+h3 {
+  @apply font-barlow text-lg text-error;
+}
+
+p {
+  @apply font-barlow text-primary;
+}
+
+ul {
+  @apply font-barlow text-primary  list-inside list-disc pl-4;
+}
+
+img {
+  @apply py-6;
+}
+
+.about-title {
+  @apply text-error font-quicksand leading-tight;
+  font-size: 80px;
+  max-width: 255px;
+}
+
+.contact-title {
+  @apply text-error font-quicksand leading-tight text-4xl;
+}
+
+.contact-input {
+  @apply text-xs border-2 p-2 border-primary w-full md:w-full font-roboto;
+  @apply focus:outline-none focus:border-purple;
+}
+
+.contact-input-error {
+  @apply text-xs border-2 p-2 border-error w-full md:w-full font-roboto;
+  @apply focus:outline-none focus:border-purple;
+}
+
+.contact-textarea {
+  @apply text-xs border-2 p-2 border-primary w-full md:w-full mt-2 font-roboto;
+  @apply focus:outline-none focus:border-purple;
+  resize: none;
+}
+
+.contact-textarea-error {
+  @apply text-xs border-2 p-2 border-error w-full md:w-full mt-2 font-roboto;
+  @apply focus:outline-none focus:border-purple;
+  resize: none;
+}
+
+.contact-btn {
+  @apply border-r-2 border-b-2 border-error;
+  @apply w-11 bg-primary ml-3;
+  @apply text-white  font-quicksand text-xl;
+  @apply flex flex-col flex-wrap items-center place-content-center;
+}
+
+.error-msg {
+  @apply text-error text-xs font-barlow p-0;
+}
+
+.post-title {
+  @apply font-quicksand text-error text-3xl pl-8;
+}
+
+.post-title-h3 {
+  @apply font-barlow text-error text-lg mb-5;
+}
+
+.post-text {
+  @apply font-barlow text-primary text-sm;
+}
+
+[data-title]:hover:after {
+  opacity: 1;
+  transition: all 0.1s ease 0.5s;
+  visibility: visible;
+}
+[data-title]:after {
+  content: attr(data-title);
+  background-color: #00ff00;
+  color: #111;
+  font-size: 150%;
+  position: absolute;
+  padding: 1px 5px 2px 5px;
+  bottom: -1.6em;
+  left: 100%;
+  white-space: normal;
+  box-shadow: 1px 1px 3px #222222;
+  opacity: 0;
+  border: 1px solid #111111;
+  z-index: 99999;
+  visibility: hidden;
+  --max-lines: 3;
+  max-height: calc(var(--lh) * var(--max-lines));
+  overflow: hidden;
+  @apply w-60 text-sm;
+  @apply font-prompt text-sm bg-gradient-to-b from-secondary to-electric-green;
+}
+[data-title] {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 20px;
+}
+
+.media-btn {
+  @apply text-error fill-light-blue w-11 h-11 border-2 border-light-blue cursor-pointer bg-white hover:bg-secondary transform rotate-0 hover:-rotate-12;
+}
+
+.media-btn:active {
+  @apply transform -rotate-12 bg-light-blue border-light-blue fill-white;
+}
+
+.media-btn-even {
+  @apply text-error fill-light-blue w-11 h-11 border-2 border-light-blue cursor-pointer bg-white hover:bg-secondary transform rotate-0 hover:rotate-12;
+}
+
+.media-btn-even:active {
+  @apply transform rotate-12 bg-light-blue border-light-blue fill-white;
+}
+
+
+.glow-on-hover {
+  /* width: 220px;
+  height: 50px; */
+  /* border: none; */
+  outline: none;
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  /* border-radius: 10px; */
+}
+
+.glow-on-hover:before {
+  content: '';
+  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  position: absolute;
+  top: -2px;
+  left:-2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+  border-radius: 10px;
+}
+
+.glow-on-hover:active {
+  color: #000
+}
+
+.glow-on-hover:active:after {
+  background: transparent;
+}
+
+.glow-on-hover:hover:before {
+  opacity: 1;
+}
+
+.glow-on-hover:after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
   height: 100%;
+  background: #111;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+@keyframes glowing {
+  0% { background-position: 0 0; }
+  50% { background-position: 400% 0; }
+  100% { background-position: 0 0; }
 }

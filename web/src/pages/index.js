@@ -1,15 +1,11 @@
 import React from "react";
 import { graphql } from "gatsby";
-import {
-  filterOutDocsPublishedInTheFuture,
-  filterOutDocsWithoutSlugs,
-  mapEdgesToNodes,
-} from "../lib/helpers";
-import BlogPostPreviewList from "../components/blog-post-preview-list";
-import Container from "../components/container";
 import GraphQLErrorList from "../components/graphql-error-list";
-import SEO from "../components/seo";
 import Layout from "../containers/layout";
+import { buildImageObj } from "../lib/helpers";
+import { imageUrlFor } from "../lib/image-url";
+import Icon from "../assets/images/Download.png";
+import SocialMedia from "../components/SocialMedia";
 
 export const query = graphql`
   fragment SanityImage on SanityMainImage {
@@ -34,32 +30,18 @@ export const query = graphql`
     }
   }
 
-  query IndexPageQuery {
-    site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
+  query HomePageQuery {
+    page: sanityHome {
+      id
       title
-      description
-      keywords
-    }
-    posts: allSanityPost(
-      limit: 6
-      sort: { fields: [publishedAt], order: DESC }
-      filter: { slug: { current: { ne: null } }, publishedAt: { ne: null } }
-    ) {
-      edges {
-        node {
-          id
-          publishedAt
-          mainImage {
-            ...SanityImage
-            alt
-          }
-          title
-          _rawExcerpt
-          slug {
-            current
-          }
-        }
+      mainImage {
+        ...SanityImage
+        alt
       }
+      description
+      footer
+      buttonLabel
+      downloadLabel
     }
   }
 `;
@@ -75,36 +57,35 @@ const IndexPage = (props) => {
     );
   }
 
-  const site = (data || {}).site;
-  const postNodes = (data || {}).posts
-    ? mapEdgesToNodes(data.posts)
-        .filter(filterOutDocsWithoutSlugs)
-        .filter(filterOutDocsPublishedInTheFuture)
-    : [];
-
-  if (!site) {
-    throw new Error(
-      'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.'
-    );
-  }
+  const page = data && data.page;
+  console.log(data);
+  const { title, description, footer, downloadLabel, mainImage } = page;
 
   return (
     <Layout>
-      <SEO
-        title={site.title}
-        description={site.description}
-        keywords={site.keywords}
-      />
-      <Container>
-        <h1 hidden>Welcome to {site.title}</h1>
-        {postNodes && (
-          <BlogPostPreviewList
-            title="Latest blog posts"
-            nodes={postNodes}
-            browseMoreHref="/archive/"
-          />
-        )}
-      </Container>
+      <div className="p-4 md:p-16 flex flex-col md:flex-row gap-6 w-full">
+        <div className="w-5/6 md:w-4/6">
+          <div>
+            <h1 className="font-quicksand text-7xl py-8">{title}</h1>
+          </div>
+          <div dangerouslySetInnerHTML={{ __html: description }} />
+          <button className="my-12 h-12 w-80 font-prompt text-sm bg-gradient-to-b from-secondary to-electric-green border border-primary flex items-center justify-around">
+            <img src={Icon} alt="Download Icon" />
+            {downloadLabel}
+          </button>
+          <div dangerouslySetInnerHTML={{ __html: footer }} />
+          <SocialMedia />
+        </div>
+        <div className="flex flex-row pt-10 w-full md:w-2/6 justify-end order-first md:order-last">
+          {mainImage && mainImage.asset && (
+            <img
+              className="w-48 h-60"
+              src={imageUrlFor(buildImageObj(mainImage)).url()}
+              alt={mainImage.alt}
+            />
+          )}
+        </div>
+      </div>
     </Layout>
   );
 };
