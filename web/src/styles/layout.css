@@ -150,6 +150,13 @@ img {
   @apply transform rotate-12 bg-light-blue border-light-blue fill-white;
 }
 
+.download-button {
+  @apply my-12 h-12 w-80 font-quicksand text-lg bg-gradient-to-b from-purple to-primary flex items-center justify-around rounded-full hover:from-primary hover:to-purple font-bold border-4 border-primary;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+}
 
 .glow-on-hover {
   /* width: 220px;
@@ -161,14 +168,54 @@ img {
   position: relative;
   z-index: 0;
   /* border-radius: 10px; */
+  @apply rounded-md;
 }
 
-.glow-on-hover:before {
-  content: '';
-  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+.download-button:before {
+  content: "";
+  background: linear-gradient(
+    90deg,
+    #7B61FF,
+    #6196FF,
+    #F54646,
+    #FFFFFF,
+    #F246F5,
+    #7a00ff,
+    #002bff,
+    #ACFFFF,
+    #7B61FF
+  );
   position: absolute;
   top: -2px;
-  left:-2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 120s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  /* border-radius: 10px; */
+  @apply rounded-full;
+}
+.glow-on-hover:before {
+  content: "";
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+  );
+  position: absolute;
+  top: -2px;
+  left: -2px;
   background-size: 400%;
   z-index: -1;
   filter: blur(5px);
@@ -176,36 +223,66 @@ img {
   height: calc(100% + 4px);
   animation: glowing 20s linear infinite;
   opacity: 0;
-  transition: opacity .3s ease-in-out;
-  border-radius: 10px;
+  transition: opacity 0.3s ease-in-out;
+  /* border-radius: 10px; */
+  @apply rounded;
 }
-
+.download-button:active
 .glow-on-hover:active {
-  color: #000
+  color: #000;
 }
 
+/* .download-button:active */
 .glow-on-hover:active:after {
   background: transparent;
 }
-
+.download-button:before,
 .glow-on-hover:hover:before {
   opacity: 1;
 }
-
+.download-button:after
 .glow-on-hover:after {
   z-index: -1;
-  content: '';
+  content: "";
   position: absolute;
   width: 100%;
   height: 100%;
   background: #111;
   left: 0;
   top: 0;
-  border-radius: 10px;
+  /* border-radius: 10px; */
+  @apply rounded;
 }
 
 @keyframes glowing {
-  0% { background-position: 0 0; }
-  50% { background-position: 400% 0; }
-  100% { background-position: 0 0; }
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
 }
+
+
+.border-desc {
+  --angle: 0deg;  
+  border-bottom: 1vmin solid ;
+  border-image: conic-gradient(from var(--angle), #F54646, #F246F5, #ACFFFF, #F54646, #F246F5, #ACFFFF, #F54646) 100;
+  animation: 60s rotate linear infinite;
+}
+
+@keyframes rotate {
+  to {
+    --angle: 360deg;
+  }
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+

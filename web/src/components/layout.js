@@ -13,6 +13,7 @@ import Designed from "../assets/svg/Designed.svg";
 import Helmet from "react-helmet";
 import SocialMedia from "../components/SocialMedia";
 import Skill from "../components/Skill";
+// import IndexPage from "../pages/index";
 
 const Layout = ({ children, path, location }) => (
   <div className="min-h-screen min-w-min bg-black bg-hero-pattern flex flex-col md:flex-row">
@@ -26,7 +27,7 @@ const Layout = ({ children, path, location }) => (
           <img src={JJMainLogo} alt="JJMainLogo" className=" p-0" />
         </div>
       </div>
-      <div className="w-full flex align-middle justify-center pt-20">
+      {/* <div className="w-full flex align-middle justify-center pt-20">
         <div className="w-3/6 flex align-middle justify-center flex-wrap gap-x-4 gap-y-4 ">
           <Skill label="Senior Front End Developer"></Skill>
           <Skill label="Senior JS Developer"></Skill>
@@ -34,10 +35,11 @@ const Layout = ({ children, path, location }) => (
           <Skill label="Front End Developer Architect"></Skill>
           <Skill label="Technical Lead"></Skill>
         </div>
-      </div>
+      </div> */}
       {/* <Navbar /> */}
       {/* <Banner /> */}
       <div>{children}</div>
+      {/* <IndexPage></IndexPage> */}
     </div>
     {/*  <div className="w-12/12 md:w-4/12 lg:2/12 border-l-2 border-b-2 border-primary flex flex-col">
       <Link to="/">
