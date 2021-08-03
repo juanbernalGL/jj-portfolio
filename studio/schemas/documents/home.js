@@ -33,5 +33,16 @@ export default {
       type: "mainImage",
       title: "Main image",
     },
+    {
+      title: "Jobs Title",
+      name: "jobs",
+      type: "array",
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "job" }],
+        },
+      ],
+    },
   ],
 };
