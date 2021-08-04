@@ -90,8 +90,8 @@ const IndexPage = (props) => {
           {downloadLabel}
         </button>
       </div>
-      <div className="p-4 md:p-16 flex flex-col md:flex-row gap-6 w-full">
-        <div className="w-full">
+      <div className="p-4 md:p-16 flex flex-col md:flex-row gap-6 w-full align-middle justify-center">
+        <div className="w-full md:w-3/5 flex align-middle justify-center">
           {/* <div>
             <h1 className="font-quicksand text-7xl py-8">{title}</h1>
           </div> */}

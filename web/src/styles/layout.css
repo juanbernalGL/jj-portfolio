@@ -268,10 +268,20 @@ img {
 
 
 .border-desc {
-  --angle: 0deg;  
-  border-bottom: 1vmin solid ;
-  border-image: conic-gradient(from var(--angle), #F54646, #F246F5, #ACFFFF, #F54646, #F246F5, #ACFFFF, #F54646) 100;
-  animation: 60s rotate linear infinite;
+  --angle: 0deg;
+  border-bottom: 1vmin solid;
+  border-image: conic-gradient(from var(--angle), #F54646, #F246F5, #ACFFFF, #F54646, #F246F5, #ACFFFF, #F54646) 10;
+  animation: 20s rotate linear infinite;
+}
+
+.border-desc::after {
+  position: absolute;
+  top: -4px; bottom: -4px;
+  left: -4px; right: -4px;
+  background: linear-gradient(red, blue);
+  content: '';
+  z-index: -1;
+  border-radius: 16px;
 }
 
 @keyframes rotate {
@@ -286,3 +296,23 @@ img {
   inherits: false;
 }
 
+.grounded-radiants {
+  position: relative;
+  border: 4px solid transparent;
+  border-radius: 16px;
+  background: linear-gradient(orange, violet);
+  background-clip: padding-box;
+  padding: 10px;
+  /* just to show box-shadow still works fine */
+  box-shadow: 0 3px 9px black, inset 0 0 9px white;
+}
+
+.grounded-radiants::after {
+  position: absolute;
+  top: -4px; bottom: -4px;
+  left: -4px; right: -4px;
+  background: linear-gradient(red, blue);
+  content: '';
+  z-index: -1;
+  border-radius: 16px;
+}
