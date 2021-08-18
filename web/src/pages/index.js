@@ -8,6 +8,7 @@ import { imageUrlFor } from "../lib/image-url";
 import SocialMedia from "../components/SocialMedia";
 import Skill from "../components/Skill";
 import DescriptionBox from "../components/DescriptionBox";
+import ParallaxImage from "../components/ParallaxImage";
 
 export const query = graphql`
   fragment SanityImage on SanityMainImage {
@@ -73,7 +74,7 @@ const IndexPage = (props) => {
         {/* <pre className="border border-primary text-white">
           {JSON.stringify(jobs)}
         </pre> */}
-        <div className="w-full md:w-4/6  flex align-middle justify-center flex-wrap gap-x-4 gap-y-4 ">
+        <div className="w-full md:w-4/6 flex align-middle justify-center flex-wrap gap-x-4 gap-y-4 ">
           {jobs.map((job) => (
             <Skill key={job.id} label={job.description}></Skill>
           ))}
@@ -111,6 +112,8 @@ const IndexPage = (props) => {
           )}
         </div> */}
       </div>
+      {/* <ParallaxImage /> */}
+      <div className="pb-96"></div>
     </Layout>
   );
 };

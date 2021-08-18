@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { graphql, useStaticQuery } from "gatsby";
+import { ParallaxProvider } from "react-scroll-parallax";
 import Layout from "../components/layout";
 
 const query = graphql`
@@ -29,13 +30,15 @@ function LayoutContainer(props) {
   }
 
   return (
-    <Layout
-      {...props}
-      showNav={showNav}
-      siteTitle={data.site.title}
-      onHideNav={handleHideNav}
-      onShowNav={handleShowNav}
-    />
+    <ParallaxProvider>
+      <Layout
+        {...props}
+        showNav={showNav}
+        siteTitle={data.site.title}
+        onHideNav={handleHideNav}
+        onShowNav={handleShowNav}
+      />
+    </ParallaxProvider>
   );
 }
 

@@ -168,7 +168,7 @@ img {
   position: relative;
   z-index: 0;
   /* border-radius: 10px; */
-  @apply rounded-md;
+  @apply rounded-md h-14 font-quicksand font-bold text-xl flex flex-wrap content-center justify-center px-5 text-primary border-2 border-primary hover:text-black;
 }
 
 .download-button:before {
@@ -226,6 +226,7 @@ img {
   transition: opacity 0.3s ease-in-out;
   /* border-radius: 10px; */
   @apply rounded;
+  color: #000;
 }
 .download-button:active
 .glow-on-hover:active {
@@ -235,10 +236,12 @@ img {
 /* .download-button:active */
 .glow-on-hover:active:after {
   background: transparent;
+  color: #000;
 }
 .download-button:before,
 .glow-on-hover:hover:before {
   opacity: 1;
+  color: #000;
 }
 .download-button:after
 .glow-on-hover:after {
@@ -252,6 +255,7 @@ img {
   top: 0;
   /* border-radius: 10px; */
   @apply rounded;
+  color: #000;
 }
 
 @keyframes glowing {
